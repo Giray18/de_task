@@ -11,10 +11,15 @@ Databricks used as data platform with PYSPARK code holding notebooks does the re
 
 **analysis_dataset_item.csv_2024-05-06.xlsx** : Same with above explanation but this time profiling made for item.csv file located on source location.
 
-**bronze_layer_pipeline.ipynb** : Holds notebook that is being used on raw data ingestion
+**bronze_layer_pipeline.ipynb** : A notebook that holds pyspark code that is being used on raw data ingestion of bronze layer.
 
 **data_profiling_notebook.ipynb** : Holds python code that is being used on data profiling activity of source files on S3 bucket.
 
+**gold_layer_pipeline.ipynb** : A notebook that holds pyspark code that is being used on aggregation of gold layer.
+
+**helper_notebook.ipynb** : A notebook that holds python/pyspark functions and data structures that is being used on ELT transformation notebooks (bronze_layer, silver_layer and gold_layer)
+
+**silver_layer_pipeline.ipynb** : A notebook that holds pyspark code that is being used on data transformations of silver layer.
 
 
  
