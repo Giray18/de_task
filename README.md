@@ -28,6 +28,13 @@ Steps related to solution can be found on below flow diagram
 
 ![picture alt](task_flow_diagram.jpg) 
 
+## Storage Layer
+Below screenshot of final status of storage layer. It can be seen that tables created on external storage and hive metastore.
+
+![picture alt](catalog_screenshot.JPG) 
+
+
+
 
 
  
