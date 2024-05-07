@@ -36,6 +36,11 @@ Steps related to solution can be found on below flow diagram
 
 ![picture alt](task_flow_diagram.jpg) 
 
+## Top Item Datamart Views
+Below are screenshots of aggregated views required by task
+
+
+
 ## Storage Layer
 Below screenshot of final status of storage layer. It can be seen that tables created on external storage (databricks_xis672e and hive metastore (gold_layer)).
 
