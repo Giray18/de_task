@@ -50,6 +50,21 @@ Below screenshot of final status of storage layer. It can be seen that tables cr
 ![picture alt](catalog_screenshot.JPG) 
 
 
+## Theoretical Assignment
+
+Explain in couple of paragraphs the difference between Data Lakehouse and Data Warehouse
+
+Data lakehouse, is the storage layer that adds relational database semantics to data lake processing, by this feature without creating a data warehouse on top of data lake, querying and data modification is available by Data Lakehouse, you can store data in tables that support CRUD (create, read, update, and delete) as we do in relational database operations as well as ACID compliance. Less resource means less admin headache, less storage and processing means less cost on cloud platforms
+
+One other advantage of Data lakehouse compliant systems are being able to operate on delta tables. Since the structure of Delta keep records on changes to be done on tables, we may have capability to versioning on write and time travel through versions by time or version number.
+
+Usually, on delta lakehouse architecture 3 tier structure being used to host data in transformation. An Ingestion layer, A cleaned (normalized data layer), An aggregated data layer. Processing done with distributed compute systems like spark or synaypse analytics dedicated sql server.
+
+An example, architecture would an Azure based Lambda architecture, We may use delta lake storage as lakehouse and manage process with both badge ingests and stream upserts on top of it. We establish all 3 layers on delta lake. Needed sources defined on visual on right side. (A Blob storage container – Databricks – Kafka, Messaging services or Azure Event Hub – Azure Stream Analytics)
+![image](https://github.com/Giray18/de_task/assets/92621482/4822fd72-1640-43a7-b5f0-8cd35deef2c1)
+
+
+
 
 
 
