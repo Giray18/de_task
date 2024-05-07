@@ -29,6 +29,7 @@ Below is screenshot of null value profiling of dat module output.
 Below there is a screenshot of notebook workflows after starter_notebook initiated.
 ![picture alt](notebook_runs.JPG) 
 
+**misc. JPG files** : Files holds screenshots used on README. (profiling_output.JPG,notebook_runs.JPG,task_flow_diagram.jpg,catalog_screenshot.JPG)
 
 ## Flow Diagram
 Steps related to solution can be found on below flow diagram
