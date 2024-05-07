@@ -24,7 +24,7 @@ Databricks used as data platform with PYSPARK code holding notebooks does the re
 **starter_notebook.ipynb** : A notebook that holds pyspark code that is being used on trigger activities of transformation notebooks (bronze,silver and gold).
 
 ## Flow Diagram
-![picture alt](task_flow_diagram.JPG) 
+![picture alt](task_flow_diagram.jpg) 
 
 
 
