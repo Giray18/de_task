@@ -1,6 +1,6 @@
 # Databricks notebook source
 # MAGIC %md
-# MAGIC ## Reads csv files from given s3 location, If no csv detected returns exception
+# MAGIC ## Reads csv files from given s3 location
 
 # COMMAND ----------
 
@@ -63,11 +63,33 @@ def read_csv_azure_file(mount_point,dataframe_name):
 # COMMAND ----------
 
 # MAGIC %md
+# MAGIC ## Read Delta file from Azure Storage
+
+# COMMAND ----------
+
+def read_delta_azure_file(mount_point,dataframe_name):
+    """
+    Creates dataframe by reading delta files from azure blob storage.
+
+    Args:
+        mount_point (str): mount point specific to container.
+        dataframe_name (str): The name of the designated dataframe name.
+        file_list (list): Name of the files to be read from storage location saved in a list.
+
+    Returns:
+        DataFrame: A spark dataframe.
+    """
+    dataframe_name = (spark.read.format("delta")\
+    .load(f"{mount_point}"))
+    return dataframe_name
+
+# COMMAND ----------
+
+# MAGIC %md
 # MAGIC ## Casts all columns into string with col method
 
 # COMMAND ----------
 
-# DBTITLE 1,Casts all columns into string with col method
 def cast_to_string(df):
     from pyspark.sql.functions import col
     """
@@ -135,3 +157,65 @@ def rename_columns(dataframe_name,df_name,mapping_dict = {}):
 # COMMAND ----------
 
 partition_dict = {"eventdfraw" : {"event_time": {"event_time_year" :"year"}}}
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Save dataframe into hive metastore schema
+
+# COMMAND ----------
+
+def create_schema(schema_name,location_name):
+    """
+    Checks if a schema exists in the spark catalog.
+
+    Args:
+        location_name (str): catalog name to save schema on
+        schema_name (str): The name of the schema to check.
+
+    Returns:
+        DataFrame: Empty DF creates schema on defined catalog if not exits
+    """
+    return spark.sql(f"CREATE SCHEMA IF NOT EXISTS  {location_name}.{schema_name}")
+
+
+def check_if_table_exists(schema_name, table_name):
+    """
+    Checks if a table exists in the spark catalog.
+
+    Args:
+        table_name (str): The name of the table to check.
+
+    Returns:
+        bool: True if the table exists, False otherwise.
+    """
+    return spark.catalog.tableExists(f"hive_metastore.{schema_name}.{table_name}_gold_layer_managed_table")
+
+def write_to_managed_table(df, table_name, schema_name, location_name, partition_cols = [] ,mode = "overwrite"):
+    """
+    Writes a DataFrame to a managed table in Delta Lake.
+
+    If the table exists and mode is overwrite, it performs an overwrite operation.
+    Otherwise, it either creates a new table or appends transactions to table based on the `mode` parameter.
+
+    Args:
+        df (pyspark.sql.DataFrame): The DataFrame to write to the table.
+        table_name (str): The name of the target table.
+        schema_name (str): The schema name of target table.
+        location_name (str): Catalog name to save schema on
+        mode (str, optional): The write mode.
+    """
+    #create schema if not exists
+    create_schema(schema_name,location_name)
+    # check if the table exists
+    if check_if_table_exists(schema_name, table_name):
+        print(f"Table exists on hive_metastore.{schema_name}.{table_name}_gold_layer_managed_table")
+        if mode == "overwrite":
+            print(f"Overwriting all transactions on managed table hive_metastore.{schema_name}.{table_name}_gold_layer_managed_table")
+            df.write.format("delta").partitionBy(partition_cols).option("delta.columnMapping.mode", "name").mode(mode).saveAsTable(f"hive_metastore.{schema_name}.{table_name}_gold_layer_managed_table")
+        else:
+            print(f"Appending all transactions on managed table hive_metastore.{schema_name}.{table_name}_gold_layer_managed_table")
+            df.write.format("delta").partitionBy(partition_cols).option("delta.columnMapping.mode", "name").mode(mode).saveAsTable(f"hive_metastore.{schema_name}.{table_name}_gold_layer_managed_table")
+    else:
+        print(f"Writing to managed table hive_metastore.{schema_name}.{table_name}_gold_layer_managed_table")
+        df.write.format("delta").partitionBy(partition_cols).option("delta.columnMapping.mode", "name").saveAsTable(f"hive_metastore.{schema_name}.{table_name}_gold_layer_managed_table")
