@@ -39,9 +39,9 @@ Steps related to solution can be found on below flow diagram
 ## Top Item Datamart Views
 Requested views extract can be found on below files
 
-Total number of item views in a particular year : Item_view_year.csv
-Rank of an item based on number of views in a particular year : Item_rank_year.csv
-The most used platform in particular year : Most_used_platform.csv
+Total number of item views in a particular year : Item_view_year.csv \n
+Rank of an item based on number of views in a particular year : Item_rank_year.csv \n
+The most used platform in particular year : Most_used_platform.csv \n
 
 
 ## Storage Layer
