@@ -21,5 +21,7 @@ Databricks used as data platform with PYSPARK code holding notebooks does the re
 
 **silver_layer_pipeline.ipynb** : A notebook that holds pyspark code that is being used on data transformations of silver layer.
 
+**starter_notebook.ipynb** : A notebook that holds pyspark code that is being used on trigger activities of transformation notebooks (bronze,silver and gold).
+
 
  
