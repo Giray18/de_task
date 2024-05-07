@@ -22,6 +22,9 @@ Databricks used as data platform with PYSPARK code holding notebooks does the re
 **silver_layer_pipeline.ipynb** : A notebook that holds pyspark code that is being used on data transformations of silver layer.
 
 **starter_notebook.ipynb** : A notebook that holds pyspark code that is being used on trigger activities of transformation notebooks (bronze,silver and gold).
+Below there is a screenshot of notebook workflows after starter_notebook initiated.
+![picture alt](notebook_runs.JPG) 
+
 
 ## Flow Diagram
 Steps related to solution can be found on below flow diagram
@@ -29,7 +32,7 @@ Steps related to solution can be found on below flow diagram
 ![picture alt](task_flow_diagram.jpg) 
 
 ## Storage Layer
-Below screenshot of final status of storage layer. It can be seen that tables created on external storage and hive metastore.
+Below screenshot of final status of storage layer. It can be seen that tables created on external storage (databricks_xis672e and hive metastore (gold_layer)).
 
 ![picture alt](catalog_screenshot.JPG) 
 
