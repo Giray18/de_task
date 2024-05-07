@@ -5,7 +5,11 @@ There are ipynb notebooks and xlsx files on main branch. Those files are creatin
 Databricks used as data platform with PYSPARK code holding notebooks does the related activities.
 
 ## Contents of Repo
-**dat** : A file that holds dat python module files (Data Profiling/Analysis Module) that is a module compiled by myself and has many methods to apply profiling/analysis activities for structured/semi-structured data sources located on different platforms. Can be imported to ipynb notebooks with import dat command.
+**dat** : A file that holds dat python module files (Data Profiling/Analysis Module) that is a module compiled by myself and has many methods to apply profiling/analysis activities for structured/semi-structured data sources located on different platforms. Can be imported to ipynb notebooks with import dat command. Detailed information can be found on link (https://github.com/Giray18/data_analysis_tool)
+
+Below is screenshot of null value profiling of dat module output.
+![picture alt](profiling_output.JPG) 
+
 
 **analysis_dataset_event.csv_2024-05-06.xlsx** : Output of data_profiling notebook which can be found on (https://github.com/Giray18/de_task/blob/main/data_profiling_notebook.ipynb) this notebook connects to S3 bucket sources and automatically creates an output xlsx file that holds profile of data source file.
 
