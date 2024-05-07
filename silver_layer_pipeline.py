@@ -17,7 +17,7 @@ from pyspark.sql.types import StructType, StructField, StringType, IntegerType, 
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## Getting helper functions from helper notebook
+# MAGIC ## Getting Helper Functions from Helper Notebook
 
 # COMMAND ----------
 
@@ -26,16 +26,10 @@ from pyspark.sql.types import StructType, StructField, StringType, IntegerType, 
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## Defining variables to be used on further loops
+# MAGIC ## Defining Variables to be Used on Further Loops
 # MAGIC ### Variables could be read from helper notebook as well but for ease of readability defining as hard coded
 
 # COMMAND ----------
-
-## Schema name (Tables to be saved into)
-schema_name = "silver_layer"
-
-## Metastore_name
-location_name = "hive_metastore"
 
 ## External file location name (Azure Storage Account)
 external_storage = "merkletaskstorage"
@@ -55,7 +49,7 @@ sas_key_name = "BLB_Strg_Access_KEY"
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## Reading Ingested Raw data from bronze layer external location
+# MAGIC ## Reading Ingested Raw Data from Bronze Layer External Location
 
 # COMMAND ----------
 
@@ -84,9 +78,12 @@ for container in dataframe_list:
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## Flatten structured columns
+# MAGIC ## Flattening Structure Data Type Holding Columns
 
 # COMMAND ----------
+
+# Schema for JSON value holding data could be parsed by below one line code however for this task I will manually define as below
+# schema = spark.read.json(eventdfraw.rdd.map(lambda row: row['event.payload'])).schema
 
 # Definining required schema for unstructure column - There is only one column exists on eventdfraw dataframe as detected on data profiling activity
 schema = StructType(
@@ -110,8 +107,8 @@ eventdfraw = eventdfraw.withColumn("event_payload", from_json(col("`event.payloa
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## Renaming some attributes on dataframes
-# MAGIC ### Based on data profiling activities made on sample data just 2 attiribute name will be changed to make it more understandable, parameters are sub class of event name due to that paramater_name = sub_event_name, paramater_value = sub_event_name_value changes will be done
+# MAGIC ## Renaming Some Attributes on Dataframes
+# MAGIC ### Based on data profiling activities made on sample data, 2 attributes name will be changed to make it more understandable, dataframe and attiribute names renaming applied are printed below
 
 # COMMAND ----------
 
@@ -119,14 +116,17 @@ eventdfraw = eventdfraw.withColumn("event_payload", from_json(col("`event.payloa
 for df_nm in dataframe_list:
     # functioned run only if dataframe is in mapping dict structure (called from helper notebook)
     if df_nm in mapping_dict.keys():
+        # Debug print
+        print(f"renamed attiributes on dataframe {df_nm}, columns {list(mapping_dict[df_nm].keys())} to {list(mapping_dict[df_nm].values())}")
         # rename columns function called from helper notebook
         globals()[df_nm] = rename_columns(globals()[df_nm],df_nm,mapping_dict)
 
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## Casting dataframe attiributes to proper data type
-# MAGIC ### Casting some attiributes aligned with business requests and lessen size volume, applying same structure with previous operation. Calling needed structures from helpers notebook
+# MAGIC ## Casting Dataframe Attiributes to Proper Data Type
+# MAGIC ### Casting some attiributes aligned with business requests and to lessen data size volume, applying same structure with previous operation. Calling needed structures from helpers notebook. Casted columns defined in print statement
+# MAGIC
 
 # COMMAND ----------
 
@@ -147,13 +147,14 @@ for df_nm in dataframe_list:
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## Creating partitioning column on fact (events dataframe) by event_time column. I applied partition level as YEAR since all requested views on top_item datamart contains that level of granularity
+# MAGIC ## Creating Partitioning Column on Fact (events dataframe) by event_time Column
+# MAGIC ### Partition level applied as YEAR since all requested views on top_item datamart contains that level of granularity
 
 # COMMAND ----------
 
 # Looped through all dataframes by calling values from a dict structure on helper notebook in case there will be a lot of transformation this structure can be changed easily and provide a dynamic structure
 for df_nm in dataframe_list:
-    # functioned run only if dataframe is in partition dict structure (called from helper notebook)
+    # runs only if dataframe is in partition dict structure (called from helper notebook)
     if df_nm in partition_dict.keys():
         for col_name,new_col_func in partition_dict[df_nm].items():
             # Debug print
@@ -172,7 +173,7 @@ for df_nm in dataframe_list:
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## Saving dataframes to silver layer storage
+# MAGIC ## Saving Dataframes to Silver Layer Storage
 
 # COMMAND ----------
 
