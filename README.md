@@ -37,12 +37,15 @@ Steps related to solution can be found on below flow diagram
 ![picture alt](task_flow_diagram.jpg) 
 
 ## Top Item Datamart Views
-Below are screenshots of aggregated views required by task
+Requested views extract can be found on below files
 
+Total number of item views in a particular year : Item_view_year.csv
+Rank of an item based on number of views in a particular year : Item_rank_year.csv
+The most used platform in particular year : Most_used_platform.csv
 
 
 ## Storage Layer
-Below screenshot of final status of storage layer. It can be seen that tables created on external storage (databricks_xis672e and hive metastore (gold_layer)).
+Below screenshot of final status of storage layer. It can be seen that tables created on external storage (databricks_xis672e and hive metastore (gold_layer)). Addition to requested views items and events tables are also saved into both layers.
 
 ![picture alt](catalog_screenshot.JPG) 
 
