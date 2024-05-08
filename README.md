@@ -49,7 +49,7 @@ Below screenshot of final status of storage layer. It can be seen that tables cr
 
 ![picture alt](catalog_screenshot.JPG) 
 
-PBI model created to demonstrate above explanation
+PBI model created to demonstrate above explanation (Date table created on PBI by AUTOCALENDAR DAX)
 
 ![picture alt](PBI_model.JPG) 
 
