@@ -53,7 +53,7 @@ PBI model created to demonstrate above explanation (Date table created on PBI by
 
 ![picture alt](PBI_model.JPG) 
 
-A table visual demonstrates above explanation which uses date table, fact and views together
+A table visual demonstrates above explanation which uses date table (for Time intelligence DAX), fact and views together
 
 ![picture alt](PBI_table.JPG) 
 
