@@ -45,9 +45,17 @@ The most used platform in particular year : Most_used_platform.csv <br>
 
 
 ## Storage Layer
-Below screenshot of final status of storage layer. It can be seen that tables created on external storage (databricks_xis672e and hive metastore (gold_layer)). Addition to requested views, items and events tables are also saved into both layers. Because on BI tools, created views can have one-many connection with fact table (events) In case further analytical calculations needed on Views like (Year over year, Percent to total etc).
+Below screenshot of final status of storage layer. It can be seen that tables created on external storage (databricks_xis672e and hive metastore (gold_layer)). Addition to requested views, items and events tables are also saved into both layers. Because on BI tools, created views can have one-many connection with fact table (events) and date tables (Bi tool created) to craft time intelligence calculations. In case further analytical calculations needed on Views like (Year over year, Percent to total etc). A short demo shown on below screenshots.
 
 ![picture alt](catalog_screenshot.JPG) 
+
+PBI model created to demonstrate above explanation
+
+![picture alt](PBI_model.JPG) 
+
+A table visual demonstrates above explanation which uses date table, fact and views together
+
+![picture alt](PBI_table.JPG) 
 
 
 ## Theoretical Assignment
