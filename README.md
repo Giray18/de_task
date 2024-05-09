@@ -68,7 +68,7 @@ One other advantage of Data lakehouse compliant systems are being able to operat
 
 Usually, on delta lakehouse architecture 3 tier structure being used to host data in transformation. An Ingestion layer, A cleaned (normalized data layer), An aggregated data layer. Processing done with distributed compute systems like spark or synaypse analytics dedicated sql server.
 
-An example, architecture would an Azure based Lambda architecture, We may use delta lake storage as lakehouse and manage process with both badge ingests and stream upserts on top of it. We establish all 3 layers on delta lake. Needed sources defined on visual on right side. (A Blob storage container – Databricks – Kafka, Messaging services or Azure Event Hub – Azure Stream Analytics)
+An example, architecture would be an Azure based Lambda architecture, We may use delta lake storage as lakehouse and manage process with both batch ingests and stream upserts on top of it. We establish all 3 layers on delta lake. Needed sources defined on visual on right side. (A Blob storage container – Databricks – Kafka, Messaging services or Azure Event Hub – Azure Stream Analytics)
 
 ![picture alt](architecture.png)
 
